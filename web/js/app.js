@@ -26,7 +26,7 @@ window.onload = function() {
   {
     fabric.Image.fromURL( url, function(oImg) {
       canvas.add(oImg);
-      addSticker('img/sticker.png');
+      addSticker('web/img/sticker.png');
     },{ crossOrigin: 'anonymous' });
   }
  
