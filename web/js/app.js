@@ -64,6 +64,7 @@ window.onload = function() {
                 console.log(response);
             } else {
                 alert('Post ID: ' + response.id);
+                alert('todo bien , regresa al index');
             }
 
         });
