@@ -54,7 +54,7 @@ window.onload = function() {
         //alert('chololo'+ data);
           console.log('http://appsancocho.herokuapp.com'+data);
            FB.api('/me/photos', 'post', {
-            message:'#VamosPalSancocho',
+            message:'#VamosPalSancocho #SancochoFest2016 , creado con https://apps.facebook.com/vamospalsancocho/',
             url:'http://appsancocho.herokuapp.com'+data       
         
         }, function(response){
