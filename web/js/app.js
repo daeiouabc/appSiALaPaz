@@ -51,11 +51,11 @@ window.onload = function() {
       },
   
       success: function(data){
-        alert('chololo'+ data);
+        //alert('chololo'+ data);
         
            FB.api('/me/photos', 'post', {
             message:'#VamosPalSancocho',
-            url:'http://localhost:8000/temp/davidgomez440886249417793.png'       
+            url:'http://appsancocho.herokuapp.com'+data       
         
         }, function(response){
 
