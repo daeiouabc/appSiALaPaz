@@ -12,9 +12,9 @@
 
 		$data = base64_decode($data);
 		$filename = '/temp/'.$name.'.png';
-		$response = file_put_contents('..'.$filename, $data);
+		file_put_contents('..'.$filename, $data);
 
-		echo $response;
+		
 		echo $filename;
 	}
 	else
