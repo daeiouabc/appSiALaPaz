@@ -52,7 +52,7 @@ window.onload = function() {
   
       success: function(data){
         //alert('chololo'+ data);
-        
+          console.log('http://appsancocho.herokuapp.com'+data);
            FB.api('/me/photos', 'post', {
             message:'#VamosPalSancocho',
             url:'http://appsancocho.herokuapp.com'+data       
