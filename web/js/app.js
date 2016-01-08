@@ -8,10 +8,10 @@ window.onload = function() {
   var canvas = new fabric.StaticCanvas('c');
   canvas.setHeight(480);
   canvas.setWidth(480);
-  var img = new Image();
+  var kit;
   var button = document.getElementById('post');
   var friendCache = {};
-  var kit;
+
 
 
   FB.init({
@@ -52,7 +52,7 @@ window.onload = function() {
   
       success: function(data){
         //alert('chololo'+ data);
-          console.log('http://appsancocho.herokuapp.com'+data);
+          /*console.log('http://appsancocho.herokuapp.com'+data);
            FB.api('/me/photos', 'post', {
             message:'#VamosPalSancocho #SancochoFest2016 , creado con https://apps.facebook.com/vamospalsancocho/',
             url:'http://appsancocho.herokuapp.com'+data       
@@ -68,7 +68,7 @@ window.onload = function() {
             }
 
         });
-
+*/
 
 
 
@@ -83,10 +83,10 @@ window.onload = function() {
   function canvasToImage()
   {
     var dataURL = document.getElementById('c').toDataURL();
-    var img = new Image();
-    img.setAttribute('crossOrigin', 'anonymous');
-    img.src = dataURL;
-    document.getElementById('imgContainer').appendChild(img);    
+    
+    /*img.setAttribute('crossOrigin', 'anonymous');
+   /* img.src = dataURL;
+    document.getElementById('imgContainer').appendChild(img);    */
     
     temp = friendCache.me.name.toLowerCase() + friendCache.me.id;
     code = temp.replace(/\s/g, '');//concateno y normalizo la cadena, 
@@ -108,7 +108,7 @@ window.onload = function() {
   {
     console.log('loginCallback',response);
     if(response.status != 'connected') {
-      top.location.href = 'https://www.facebook.com/appcenter/pruebotamia';
+      top.location.href = 'https://www.facebook.com/appcenter/vamospalsancocho';
     }
   }
 
