@@ -1,12 +1,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		
 		<style>
 		*
 		{
-		font-family: 'Open Sans', sans-serif;
-		color:#333;	
+		font-family: helvetica, arial, sans-serif;
+		
+		font-weight: 500;
 		}
 		canvas, .center
 		{
@@ -17,26 +18,24 @@
 
 		button
 		{
-			
+			width: 48%;
 			margin:12px;
 			padding: 12px;
-			font-size: 15px;
-			background: transparent;
+			font-size: 12px;
+			background:#3a5795;
 			border:1px #2196f3 solid;
-			color:#2196f3;
-			border-radius: 8px;
+			color:#fff;
+			border-radius: 5px;
 			cursor: pointer;
 			transition:1s all;
 			font-weight: bold;
 		}
-		button:hover
+		#name
 		{
-			background: #2196f3;
-			color:#fff;
+			color: #344;
 		}
-		h1
-		{
-			color:#3f51b5
+		h5{
+			color:#616161;
 		}
 	
 		</style>
@@ -44,10 +43,12 @@
 
 	<body>
 		<div class="center">
-			<h1>¡¡ Vamos Pa'l Sancocho 2016 !!</h1>
-			<h3>Adorna tu Foto de perfil en invita a tus amigos</h3>
+			<h2>¡¡ Vamos Pa'l Sancocho 2016 !!</h2>
+			<h5><span id="name"></span>, Adorna tu Foto de perfil e invita a tus amigos, 
+			Que nos vamos pal Sancocho Fest 2016 !!!!
+			</h5>
 			<canvas id="c"></canvas>
-			<button id="subir">Publicar en mi perfil</button>
+			<button id="upload">Publicar en mi perfil</button>
 		</div>
 
 	<script type="text/javascript" src="lib/minAjax.js"></script>

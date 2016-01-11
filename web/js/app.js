@@ -9,7 +9,8 @@ window.onload = function() {
   canvas.setHeight(480);
   canvas.setWidth(480);
   var kit;
-  var button = document.getElementById('post');
+  var button = document.getElementById('upload');
+  var name = document.getElementById('name');
   var friendCache = {};
 
 
@@ -26,7 +27,7 @@ window.onload = function() {
   {
     fabric.Image.fromURL( url, function(oImg) {
       canvas.add(oImg);
-      addSticker('img/sticker.png');
+      addSticker('img/sticker.png', {scale:0.6});
     },{ crossOrigin: 'anonymous' });
   }
  
@@ -34,7 +35,7 @@ window.onload = function() {
   function addSticker(url)
   {
     fabric.Image.fromURL( url, function(oImg) {
-      canvas.add(oImg.set({ top: 350,}).scale(0.6));
+      canvas.add(oImg.set({ top: 0,}).scale(0.98));
        canvasToImage();
     },{ crossOrigin: 'anonymous' });
   }
@@ -134,7 +135,7 @@ window.onload = function() {
 
   function getMe(callback)
   {
-    FB.api("/me?fields=name,picture.width(360)", function(response){
+    FB.api("/me?fields=name,picture.width(480)", function(response){
       if( !response.error )
       {
 
@@ -142,6 +143,7 @@ window.onload = function() {
         console.log(response);
         callback(); 
         addProfilePicture(response.picture.data.url);
+        name.innerHTML = response.name;
 
       } else 
       {
