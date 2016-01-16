@@ -12,7 +12,7 @@
 
 		$data = base64_decode($data);
 		$filename = sys_get_temp_dir().'/'.$name.'.png';
-		file_put_contents('..'.$filename, $data);
+		file_put_contents($filename, $data);
 		echo $filename;
 	}
 	else
