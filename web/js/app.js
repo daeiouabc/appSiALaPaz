@@ -52,7 +52,7 @@ window.onload = function() {
       },
   
       success: function(data){
-        alert('chololo'+ data);
+        
         friendCache.savedImage = data;
       }
 

@@ -11,9 +11,9 @@
 		list(, $data)      = explode(',', $data);
 
 		$data = base64_decode($data);
-		$filename = '/temp/'.$name.'.png';
+		$filename = sys_get_temp_dir().'/'.$name.'.png';
 		file_put_contents('..'.$filename, $data);
-		echo sys_get_temp_dir();
+		
 		echo "    ";
 		echo $filename;
 	}
