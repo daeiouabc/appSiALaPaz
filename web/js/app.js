@@ -43,37 +43,17 @@ window.onload = function() {
   function saveImage(data, name)
   {
     minAjax({
-      url:"php/saveImg.php",//request URL
-      type:"POST",//Request type GET/POST
-      //Send Data in form of GET/POST
+      url:"php/saveImg.php",
+      type:"POST",
+ 
       data:{
         data:data,
         name:name
       },
   
       success: function(data){
-        //alert('chololo'+ data);
-          /*console.log('http://appsancocho.herokuapp.com'+data);
-           FB.api('/me/photos', 'post', {
-            message:'#VamosPalSancocho #SancochoFest2016 , creado con https://apps.facebook.com/vamospalsancocho/',
-            url:'http://appsancocho.herokuapp.com'+data       
-        
-        }, function(response){
-
-            if (!response || response.error) {
-                alert('Error occured');
-                console.log(response);
-            } else {
-                alert('Post ID: ' + response.id);
-                alert('todo bien , regresa al index');
-            }
-
-        });
-*/
-
-
-
-
+        alert('chololo'+ data);
+        friendCache.savedImage = data;
       }
 
     });
@@ -84,14 +64,14 @@ window.onload = function() {
   function canvasToImage()
   {
     var dataURL = document.getElementById('c').toDataURL();
+    img = new Image();
     
-    /*img.setAttribute('crossOrigin', 'anonymous');
-   /* img.src = dataURL;
-    document.getElementById('imgContainer').appendChild(img);    */
+    img.src = dataURL;
+    document.getElementById('img-container').appendChild(img);   
     
     temp = friendCache.me.name.toLowerCase() + friendCache.me.id;
     code = temp.replace(/\s/g, '');//concateno y normalizo la cadena, 
-    //nombre d earchivo temporal
+    //nombre de archivo temporal
     
     saveImage(dataURL, code); 
     return dataURL;
@@ -152,8 +132,28 @@ window.onload = function() {
     });
   }
 
+  function postImage()
+  {
+        console.log('http://appsancocho.herokuapp.com'+friendCache.savedImage);
+           FB.api('/me/photos', 'post', {
+            message:'#VamosPalSancocho #SancochoFest2016 , creado con https://apps.facebook.com/vamospalsancocho/',
+            url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
+        
+        }, function(response){
+
+            if (!response || response.error) {
+                alert('Error occured');
+                console.log(response);
+            } else {
+                alert('Post ID: ' + response.id);
+                alert('todo bien , regresa al index');
+            }
+
+        });
+  }
 
 
+  button.addEventListener('click',postImage);
   FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
   FB.Event.subscribe('auth.statusChange', onStatusChange);
 

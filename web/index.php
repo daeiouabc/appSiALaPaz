@@ -14,6 +14,7 @@
 			display: block;
 			margin: 0 auto !important;
 			text-align: center;
+			
 		}
 
 		button
@@ -29,6 +30,10 @@
 			cursor: pointer;
 			transition:1s all;
 			font-weight: bold;
+		}
+		img
+		{
+			max-width: 100%;	
 		}
 		#name
 		{
@@ -47,8 +52,16 @@
 			<h5><span id="name"></span>, Adorna tu Foto de perfil e invita a tus amigos, 
 			Que nos vamos pal Sancocho Fest 2016 !!!!
 			</h5>
-			<canvas id="c"></canvas>
+			
+			<div id="img-container">
+			</div>
+			
 			<button id="upload">Publicar en mi perfil</button>
+			
+			<div hidden>
+				<canvas id="c"></canvas>
+			</div>	
+		
 		</div>
 
 	<script type="text/javascript" src="lib/minAjax.js"></script>
