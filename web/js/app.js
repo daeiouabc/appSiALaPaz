@@ -35,7 +35,7 @@ window.onload = function() {
   function addSticker(url)
   {
     fabric.Image.fromURL( url, function(oImg) {
-      canvas.add(oImg.set({ top: 0,}).scale(0.98));
+      canvas.add(oImg.set({top: 365}).scale(1));
        canvasToImage();
     },{ crossOrigin: 'anonymous' });
   }

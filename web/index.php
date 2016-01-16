@@ -3,24 +3,45 @@
 		<meta charset="utf-8">
 		
 		<style>
+		img:hover
+		{
+		/*-ms-transform: rotate(2deg); /* IE 9 */
+    	/*-webkit-transform: rotate(2deg); /* Chrome, Safari, Opera */
+    	/*transform: rotate(2deg);*/
+		
+		transform:scale(1.2);
+		}
+		h2
+		{
+			color: turquoise;
+
+		}
 		*
 		{
 		font-family: helvetica, arial, sans-serif;
 		
 		font-weight: 500;
 		}
-		canvas, .center
+		.center
 		{
 			display: block;
-			margin: 0 auto !important;
+			margin: 50px auto !important;
 			text-align: center;
-			
+			max-width: 30%;
+		}
+		@media only screen and (max-width: 700px) 
+		{
+			.center
+		{
+		
+			max-width: 80%;
+		}
 		}
 
 		button
 		{
-			width: 48%;
-			margin:12px;
+			width: 100%;
+			margin: 5px 0px;
 			padding: 12px;
 			font-size: 12px;
 			background:#3a5795;
@@ -28,12 +49,12 @@
 			color:#fff;
 			border-radius: 5px;
 			cursor: pointer;
-			transition:1s all;
 			font-weight: bold;
 		}
 		img
 		{
-			max-width: 100%;	
+			max-width: 100%;
+			transition:2s all;	
 		}
 		#name
 		{
@@ -42,20 +63,25 @@
 		h5{
 			color:#616161;
 		}
-	
+		#img-container
+		{
+			overflow: hidden;
+		}
 		</style>
 	</head>
 
 	<body>
 		<div class="center">
 			<h2>¡¡ Vamos Pa'l Sancocho 2016 !!</h2>
-			<h5><span id="name"></span>, Adorna tu Foto de perfil e invita a tus amigos, 
-			Que nos vamos pal Sancocho Fest 2016 !!!!
-			</h5>
+			
 			
 			<div id="img-container">
 			</div>
-			
+
+			<h5><span id="name"></span>, Ahora invita a tus amigos a que adorner su foto de perfil con
+			el sancocho, Que nos vamos pal <strong>Sancocho Fest 2016 !!!!</strong>
+			</h5>
+
 			<button id="upload">Publicar en mi perfil</button>
 			
 			<div hidden>
