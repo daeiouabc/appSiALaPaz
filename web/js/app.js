@@ -136,7 +136,7 @@ window.onload = function() {
   {
         console.log('http://appsancocho.herokuapp.com'+friendCache.savedImage);
            FB.api('/me/photos', 'post', {
-            message:'#VamosPalSancocho #SancochoFest2016 , creado con https://apps.facebook.com/vamospalsancocho/',
+            message:'#VamosPalSancocho #SancochoFest2016 , :cry: :zzz: creado con https://apps.facebook.com/vamospalsancocho/',
             url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
         
         }, function(response){
