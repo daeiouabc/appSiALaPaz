@@ -13,8 +13,8 @@
 		$data = base64_decode($data);
 		$filename = '/temp/'.$name.'.png';
 		file_put_contents('..'.$filename, $data);
-
-		
+		echo sys_get_temp_dir();
+		echo "    ";
 		echo $filename;
 	}
 	else
