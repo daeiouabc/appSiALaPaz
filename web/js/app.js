@@ -138,8 +138,8 @@ window.onload = function() {
         console.log('http://appsancocho.herokuapp.com'+friendCache.savedImage);
            FB.api('/me/photos', 'post', {
             message:'#VamosPalSancocho #SancochoFest2016 debug , :cry: :zzz: creado con https://apps.facebook.com/vamospalsancocho/',
-            url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
-        
+            //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
+            url:'http://static.pulzo.com/styles/pulzo2_normal/public/mujerrelato.jpg?itok=pQ7GYYP1'
         }, function(response){
 
             if (!response || response.error) {
