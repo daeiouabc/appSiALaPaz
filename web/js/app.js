@@ -12,7 +12,7 @@ window.onload = function() {
   var button = document.getElementById('upload');
   var name = document.getElementById('name');
   var friendCache = {};
-
+  var clientId = 'a6248b72f7f554d';
 
 
   FB.init({
@@ -40,42 +40,66 @@ window.onload = function() {
     },{ crossOrigin: 'anonymous' });
   }
 
-  function saveImage(data, name)
+  function saveImage(data)
   {
-    minAjax({
-      url:"php/saveImg.php",
-      type:"POST",
- 
-      data:{
-        data:data,
-        name:name
-      },
   
-      success: function(data){
-        
-        friendCache.savedImage = data;
-      }
-
+      /*console.log(data);*/
+     $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      type: 'POST',
+      headers: {
+        Authorization: 'Client-ID ' + clientId,
+        Accept: 'application/json'
+      },
+      data: {
+        image: data,
+        type: 'base64'
+      },
+      success: function(result) {
+        /*console.log(result);
+        console.log(result.data.link);
+        */
+        friendCache.savedImage = result.data.link;
+        friendCache.idSavedImage = result.data.deletehash;
+        button.disabled = false;
+        }
     });
+
+
+
   }
 
+  function deleteImage(deletehash)
+  {
+    $.ajax({
+      url: 'https://api.imgur.com/3/image/'+deletehash,
+      type: 'DELETE',
+      headers: {
+        Authorization: 'Client-ID ' + clientId,
+        Accept: 'application/json'
+      },
+    success: function(result) {
+        console.log('borrada con exito')
+      }
+    });
+
+  }
 
 
   function canvasToImage()
   {
-    var dataURL = document.getElementById('c').toDataURL();
+    try {
+      dataURL = document.getElementById('c').toDataURL('image/jpeg', 0.9).split(',')[1];
+      } catch(e) {
+      dataURL = document.getElementById('c').toDataURL().split(',')[1];
+      }
+    saveImage(dataURL); 
+    
     img = new Image();
     
-    img.src = dataURL;
+    img.src = document.getElementById('c').toDataURL();
     document.getElementById('img-container').appendChild(img);   
     
-    temp = friendCache.me.name.toLowerCase() + friendCache.me.id;
-    code = temp.replace(/\s/g, '');//concateno y normalizo la cadena, 
-    //nombre de archivo temporal
-    
-    saveImage(dataURL, code); 
-    return dataURL;
-        
   }
 
 
@@ -102,7 +126,7 @@ window.onload = function() {
     } else 
     {
       getMe(function(){
-        console.log(kit);
+        //console.log(kit);
       });
     }
   }
@@ -135,11 +159,11 @@ window.onload = function() {
   function postImage()
   {
        
-        console.log('http://appsancocho.herokuapp.com'+friendCache.savedImage);
+        console.log(friendCache.savedImage);
            FB.api('/me/photos', 'post', {
-            message:'#VamosPalSancocho #SancochoFest2016 debug , :cry: :zzz: creado con https://apps.facebook.com/vamospalsancocho/',
+            message:'#VamosPalSancocho #SancochoFest2016 debug ,creado con https://apps.facebook.com/vamospalsancocho/',
             //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
-            url:'http://static.pulzo.com/styles/pulzo2_normal/public/mujerrelato.jpg?itok=pQ7GYYP1'
+            url:friendCache.savedImage
         }, function(response){
 
             if (!response || response.error) {
@@ -148,6 +172,7 @@ window.onload = function() {
             } else {
                 alert('Post ID: ' + response.id);
                 alert('todo bien , regresa al index');
+                deleteImage(friendCache.idSavedImage);
             }
 
         });

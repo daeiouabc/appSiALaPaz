@@ -1,16 +1,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		
+		 <script src="js/jquery.min.js"></script>
 		<style>
-		img:hover
-		{
-		/*-ms-transform: rotate(2deg); /* IE 9 */
-    	/*-webkit-transform: rotate(2deg); /* Chrome, Safari, Opera */
-    	/*transform: rotate(2deg);*/
-		
-		transform:scale(1.2);
-		}
 		h2
 		{
 			color: turquoise;
@@ -37,7 +29,13 @@
 			max-width: 80%;
 		}
 		}
+		button:disabled
+		{
+			background: gray;
+			color: #eee;
+			cursor: not-allowed;
 
+		}
 		button
 		{
 			width: 100%;
@@ -82,7 +80,7 @@
 			el sancocho, Que nos vamos pal <strong>Sancocho Fest 2016 !!!!</strong>
 			</h5>
 
-			<button id="upload">Publicar en mi perfil</button>
+			<button id="upload" disabled>Publicar en mi perfil</button>
 			
 			<div hidden>
 				<canvas id="c"></canvas>
