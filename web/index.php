@@ -1,25 +1,25 @@
-<html>
+<!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
 		 <script src="js/jquery.min.js"></script>
 		<style>
-		h2
+		h1
 		{
 			color: turquoise;
-
+			font-weight: bolder;
+			margin: 20px 0;
 		}
 		*
 		{
 		font-family: helvetica, arial, sans-serif;
-		
-		font-weight: 500;
+		/*font-weight: 500;*/
 		}
 		.center
 		{
 			display: block;
 			margin: 50px auto !important;
 			text-align: center;
-			max-width: 30%;
+			max-width: 40%;
 		}
 		@media only screen and (max-width: 700px) 
 		{
@@ -52,7 +52,6 @@
 		img
 		{
 			max-width: 100%;
-			transition:2s all;	
 		}
 		#name
 		{
@@ -65,25 +64,45 @@
 		{
 			overflow: hidden;
 		}
+		.container
+		{
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+		}
+		.item
+		{
+			cursor: pointer;
+			margin: 0 1.2em;
+		}
 		</style>
 	</head>
 
 	<body>
 		<div class="center">
-			<h2>¡¡ Vamos Pa'l Sancocho 2016 !!</h2>
+			<h1>¡¡ Yo digo SI a la PAZ !!</h1>
 			
-			
-			<div id="img-container">
+			<div class="container">
+				<div  class="item" id="img-container1">
+				</div>
+
+				<div class="item" id="img-container2">
+				</div>
 			</div>
 
-			<h5><span id="name"></span>, Ahora invita a tus amigos a que adorner su foto de perfil con
-			el sancocho, Que nos vamos pal <strong>Sancocho Fest 2016 !!!!</strong>
+			<h5><span id="name"></span>, Ahora invita a tus amigos apoyen el SI añadiendolo en su foto de perfil <strong>#SIALaPaz</strong>
 			</h5>
+
 
 			<button id="upload" disabled>Publicar en mi perfil</button>
 			
 			<div hidden>
 				<canvas id="c"></canvas>
+			</div>
+			<div hidden>
+				<canvas id="c2"></canvas>
 			</div>	
 		
 		</div>

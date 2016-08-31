@@ -6,44 +6,70 @@ David Gomez - Enero 2016
 window.onload = function() {
 
   var canvas = new fabric.StaticCanvas('c');
+  var _canvas = new fabric.StaticCanvas('c2');
   canvas.setHeight(480);
   canvas.setWidth(480);
+  _canvas.setHeight(480);
+  _canvas.setWidth(480);
   var kit;
   var button = document.getElementById('upload');
   var name = document.getElementById('name');
+  var stick1 = document.getElementById('1');
+  var stick2 = document.getElementById('2');
   var friendCache = {};
   var clientId = 'a6248b72f7f554d';
 
 
   FB.init({
-    appId: 1472309483073934,
+    appId: 1585144288446378,
     frictionlessRequests: true,
     status: true,
     version: 'v2.5'
   });
 
 
+  function event_sticker(e)
+  {
+    console.log(e);
+
+  }
+
+
   function addProfilePicture(url)
   {
     fabric.Image.fromURL( url, function(oImg) {
       canvas.add(oImg);
-      addSticker('img/sticker.png', {scale:0.6});
+      _canvas.add(oImg);
+      //canvasToImage()
+      addStickers();
+      
     },{ crossOrigin: 'anonymous' });
   }
  
 
-  function addSticker(url)
+  function addStickers()
   {
-    fabric.Image.fromURL( url, function(oImg) {
-      canvas.add(oImg.set({top: 365}).scale(1));
-       canvasToImage();
+    fabric.Image.fromURL( 'img/SiALaPaz5.png', function(oImg) {
+      canvas.add(oImg.set({top: 310}).scale(0.8));
+      
+      fabric.Image.fromURL('img/SiALaPaz6.jpg', function(oImg) {
+        _canvas.add(oImg.set({top: 310}).scale(0.8));
+        canvasToImage();
+      
+      },{ crossOrigin: 'anonymous' });
+
+
     },{ crossOrigin: 'anonymous' });
+    
+    
+
+    
   }
 
   function saveImage(data)
   {
   
-      /*console.log(data);*/
+      /*console.log(data);
      $.ajax({
       url: 'https://api.imgur.com/3/image',
       type: 'POST',
@@ -58,14 +84,14 @@ window.onload = function() {
       success: function(result) {
         /*console.log(result);
         console.log(result.data.link);
-        */
+        
         friendCache.savedImage = result.data.link;
         friendCache.idSavedImage = result.data.deletehash;
         button.disabled = false;
         }
     });
 
-
+  */
 
   }
 
@@ -93,13 +119,17 @@ window.onload = function() {
       } catch(e) {
       dataURL = document.getElementById('c').toDataURL().split(',')[1];
       }
-    saveImage(dataURL); 
     
-    img = new Image();
+    //saveImage(dataURL); 
     
-    img.src = document.getElementById('c').toDataURL();
-    document.getElementById('img-container').appendChild(img);   
+    img1 = new Image();
+    img2 = new Image();
     
+    img1.src = document.getElementById('c').toDataURL();
+    document.getElementById('img-container1').appendChild(img1);   
+    
+     img2.src = document.getElementById('c2').toDataURL();
+    document.getElementById('img-container2').appendChild(img2);   
   }
 
 
@@ -177,6 +207,7 @@ window.onload = function() {
 
         });
   }
+
 
 
   button.addEventListener('click',postImage);
