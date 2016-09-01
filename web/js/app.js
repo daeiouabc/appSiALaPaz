@@ -220,7 +220,7 @@ window.onload = function() {
       console.log(friendCache.savedImage);
       console.log(friendCache.savedImage);
       FB.api('/me/photos', 'post', {
-          message:'#SiALaPaz #mensajes,creado con https://apps.facebook.com/SiALaPaz/',
+          message:'#SiALaPaz #Paz,creado con https://apps.facebook.com/1585144288446378/',
           //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
           url:friendCache.savedImage
       }, function(response){
