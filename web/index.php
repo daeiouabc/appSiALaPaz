@@ -85,29 +85,35 @@
 			<h1>¡¡ Yo digo SI a la PAZ !!</h1>
 			
 			<div class="container">
-				<div  class="item" id="img-container1">
+
+				<div data-canvas="c1" class="item" id="img-container1">
+					
 				</div>
 
-				<div class="item" id="img-container2">
+				<div data-canvas="c2" class="item" id="img-container2">
+					
 				</div>
+
 			</div>
 
-			<h5><span id="name"></span>, Ahora invita a tus amigos apoyen el SI añadiendolo en su foto de perfil <strong>#SIALaPaz</strong>
+			<h5>
+				<span id="name"></span>, Ahora invita a tus amigos apoyen el SI añadiendolo en su foto de perfil 
+				<strong>#SIALaPaz</strong>
 			</h5>
 
 
 			<button id="upload" disabled>Publicar en mi perfil</button>
 			
 			<div hidden>
-				<canvas id="c"></canvas>
+				<canvas id="c1"></canvas>
 			</div>
+
 			<div hidden>
 				<canvas id="c2"></canvas>
 			</div>	
 		
 		</div>
 
-	<script type="text/javascript" src="lib/minAjax.js"></script>
 	<script type="text/javascript" src="lib/fabricjs.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script>

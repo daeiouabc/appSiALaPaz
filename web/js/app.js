@@ -5,7 +5,7 @@ David Gomez - Enero 2016
 
 window.onload = function() {
 
-  var canvas = new fabric.StaticCanvas('c');
+  var canvas = new fabric.StaticCanvas('c1');
   var _canvas = new fabric.StaticCanvas('c2');
   canvas.setHeight(480);
   canvas.setWidth(480);
@@ -14,8 +14,8 @@ window.onload = function() {
   var kit;
   var button = document.getElementById('upload');
   var name = document.getElementById('name');
-  var stick1 = document.getElementById('1');
-  var stick2 = document.getElementById('2');
+  var img1 = document.getElementById('img-container1');
+  var img2 = document.getElementById('img-container2');
   var friendCache = {};
   var clientId = 'a6248b72f7f554d';
 
@@ -28,19 +28,19 @@ window.onload = function() {
   });
 
 
-  function event_sticker(e)
-  {
-    console.log(e);
-
-  }
-
-
   function addProfilePicture(url)
   {
     fabric.Image.fromURL( url, function(oImg) {
       canvas.add(oImg);
       _canvas.add(oImg);
-      //canvasToImage()
+
+      fabric.Image.fromURL('img/gradiente.png', function(oImg) {
+       
+        _canvas.add(oImg.set({top: 310}).scale(1));
+        canvas.add(oImg.set({top: 310}).scale(1));
+      
+      },{ crossOrigin: 'anonymous' });
+      
       addStickers();
       
     },{ crossOrigin: 'anonymous' });
@@ -49,27 +49,27 @@ window.onload = function() {
 
   function addStickers()
   {
-    fabric.Image.fromURL( 'img/SiALaPaz5.png', function(oImg) {
-      canvas.add(oImg.set({top: 310}).scale(0.8));
+    
+    fabric.Image.fromURL( 'img/stick1.png', function(oImg) {
       
-      fabric.Image.fromURL('img/SiALaPaz6.jpg', function(oImg) {
-        _canvas.add(oImg.set({top: 310}).scale(0.8));
+      canvas.add(oImg.set({top: 310, left:50}).scale(0.5));
+      
+      fabric.Image.fromURL('img/stick2.png', function(oImg) {
+       
+        _canvas.add(oImg.set({top: 310, left:50}).scale(0.65));
         canvasToImage();
       
       },{ crossOrigin: 'anonymous' });
 
 
     },{ crossOrigin: 'anonymous' });
-    
-    
-
-    
   }
 
-  function saveImage(data)
+
+
+  function saveImage(data,callback)
   {
-  
-      /*console.log(data);
+
      $.ajax({
       url: 'https://api.imgur.com/3/image',
       type: 'POST',
@@ -82,16 +82,17 @@ window.onload = function() {
         type: 'base64'
       },
       success: function(result) {
-        /*console.log(result);
-        console.log(result.data.link);
-        
+        console.log(result);
+        //console.log(result.data.link);
         friendCache.savedImage = result.data.link;
         friendCache.idSavedImage = result.data.deletehash;
-        button.disabled = false;
-        }
+        callback(); 
+      }
+      
     });
 
-  */
+    
+  
 
   }
 
@@ -114,22 +115,16 @@ window.onload = function() {
 
   function canvasToImage()
   {
-    try {
-      dataURL = document.getElementById('c').toDataURL('image/jpeg', 0.9).split(',')[1];
-      } catch(e) {
-      dataURL = document.getElementById('c').toDataURL().split(',')[1];
-      }
-    
-    //saveImage(dataURL); 
-    
+     
     img1 = new Image();
     img2 = new Image();
     
-    img1.src = document.getElementById('c').toDataURL();
+    img1.src = document.getElementById('c1').toDataURL();
     document.getElementById('img-container1').appendChild(img1);   
     
-     img2.src = document.getElementById('c2').toDataURL();
+    img2.src = document.getElementById('c2').toDataURL();
     document.getElementById('img-container2').appendChild(img2);   
+    button.disabled = false;
   }
 
 
@@ -175,7 +170,7 @@ window.onload = function() {
 
         friendCache.me = response;
         console.log(response);
-        callback(); 
+        //callback(); 
         addProfilePicture(response.picture.data.url);
         name.innerHTML = response.name;
 
@@ -186,29 +181,50 @@ window.onload = function() {
     });
   }
 
-  function postImage()
+  function selectImage(event)
   {
-       
-        console.log(friendCache.savedImage);
-           FB.api('/me/photos', 'post', {
-            message:'#VamosPalSancocho #SancochoFest2016 debug ,creado con https://apps.facebook.com/vamospalsancocho/',
-            //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
-            url:friendCache.savedImage
-        }, function(response){
-
-            if (!response || response.error) {
-                alert('Error occured');
-                console.log(response);
-            } else {
-                alert('Post ID: ' + response.id);
-                alert('todo bien , regresa al index');
-                deleteImage(friendCache.idSavedImage);
-            }
-
-        });
+      console.log(event.target.parentElement.dataset.canvas);
+      friendCache.idCanvas = event.target.parentElement.dataset.canvas;
+      //alert();
   }
 
 
+  function postImage()
+  {
+
+    //console.log(friendCache.savedImage);  
+    try {
+      dataURL = document.getElementById(friendCache.idCanvas).toDataURL('image/jpeg', 0.9).split(',')[1];
+    } catch(e) {
+      dataURL = document.getElementById(friendCache.idCanvas).toDataURL().split(',')[1];
+    }  
+
+    saveImage( dataURL, function(){ 
+
+      console.log(friendCache.savedImage);
+      console.log(friendCache.savedImage);
+      FB.api('/me/photos', 'post', {
+          message:'#hastags #mensajes,creado con https://apps.facebook.com/SiALaPaz/',
+          //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
+          url:friendCache.savedImage
+      }, function(response){
+
+          if (!response || response.error) {
+              alert('Error occured');
+              console.log(response);
+          } else {
+              alert('Post ID: ' + response.id);
+              alert('todo bien , regresa al index');
+              deleteImage(friendCache.idSavedImage);
+          }
+
+      });
+    });
+  }
+
+
+  img1.addEventListener('click', selectImage);
+  img2.addEventListener('click', selectImage);
 
   button.addEventListener('click',postImage);
   FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
