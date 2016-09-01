@@ -84,6 +84,7 @@ window.onload = function() {
       success: function(result) {
         console.log(result);
         //console.log(result.data.link);
+
         friendCache.savedImage = result.data.link;
         friendCache.idSavedImage = result.data.deletehash;
         callback(); 
@@ -96,7 +97,7 @@ window.onload = function() {
 
   }
 
-  function deleteImage(deletehash)
+  function deleteImage(deletehash, callback)
   {
     $.ajax({
       url: 'https://api.imgur.com/3/image/'+deletehash,
@@ -106,7 +107,8 @@ window.onload = function() {
         Accept: 'application/json'
       },
     success: function(result) {
-        console.log('borrada con exito')
+        console.log('borrada con exito');
+        callback();
       }
     });
 
@@ -124,7 +126,7 @@ window.onload = function() {
     
     img2.src = document.getElementById('c2').toDataURL();
     document.getElementById('img-container2').appendChild(img2);   
-    button.disabled = false;
+    
   }
 
 
@@ -167,15 +169,14 @@ window.onload = function() {
     FB.api("/me?fields=name,picture.width(480)", function(response){
       if( !response.error )
       {
-
         friendCache.me = response;
         console.log(response);
         //callback(); 
         addProfilePicture(response.picture.data.url);
         name.innerHTML = response.name;
 
-      } else 
-      {
+      } else {
+
         console.error('/me', response);
       }
     });
@@ -183,9 +184,24 @@ window.onload = function() {
 
   function selectImage(event)
   {
-      console.log(event.target.parentElement.dataset.canvas);
-      friendCache.idCanvas = event.target.parentElement.dataset.canvas;
-      //alert();
+      
+      if(button.disabled == true) button.disabled = false;
+      
+
+      id_canvas = event.target.parentElement.dataset.canvas;
+      friendCache.idCanvas = id_canvas;
+
+      if (id_canvas == 'c1') {
+
+        img2.className = "item"
+        img1.className = "item selected";
+
+      } else {
+
+        img1.className = "item"
+        img2.className = "item selected";
+
+      }
   }
 
 
@@ -198,13 +214,13 @@ window.onload = function() {
     } catch(e) {
       dataURL = document.getElementById(friendCache.idCanvas).toDataURL().split(',')[1];
     }  
-
+    button.innerHTML = "Publicando .....";
     saveImage( dataURL, function(){ 
 
       console.log(friendCache.savedImage);
       console.log(friendCache.savedImage);
       FB.api('/me/photos', 'post', {
-          message:'#hastags #mensajes,creado con https://apps.facebook.com/SiALaPaz/',
+          message:'#SiALaPaz #mensajes,creado con https://apps.facebook.com/SiALaPaz/',
           //url:'http://appsancocho.herokuapp.com'+friendCache.savedImage       
           url:friendCache.savedImage
       }, function(response){
@@ -214,8 +230,10 @@ window.onload = function() {
               console.log(response);
           } else {
               alert('Post ID: ' + response.id);
-              alert('todo bien , regresa al index');
-              deleteImage(friendCache.idSavedImage);
+              deleteImage(friendCache.idSavedImage, function() {
+                location.href = "https://facebook.com/"+response.id;
+              });
+              
           }
 
       });

@@ -12,14 +12,13 @@
 		*
 		{
 		font-family: helvetica, arial, sans-serif;
-		/*font-weight: 500;*/
 		}
 		.center
 		{
 			display: block;
 			margin: 50px auto !important;
 			text-align: center;
-			max-width: 40%;
+			max-width: 50%;
 		}
 		@media only screen and (max-width: 700px) 
 		{
@@ -52,13 +51,20 @@
 		img
 		{
 			max-width: 100%;
+			transition: .3s border width;
+		}
+		.selected
+		{
+		border: 1px rgba(58, 87, 149, 0.71) solid;
+		max-width:115%;
 		}
 		#name
 		{
-			color: #344;
+		color: #344;
 		}
-		h5{
-			color:#616161;
+		h5
+		{
+		color:#616161;
 		}
 		#img-container
 		{
